@@ -13,7 +13,7 @@ fn main() {
     loop {
 
         let mut guess = String::new();
-        
+
         io::stdin()
             .read_line(&mut guess)
             .expect("Failed to read line");
@@ -23,8 +23,11 @@ fn main() {
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small"),
-            Ordering::Equal => println!("You win!"),
             Ordering::Greater => println!("Too big"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
         }
 
         println!("You guess: {guess}");
