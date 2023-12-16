@@ -4,11 +4,8 @@ use rand::Rng;
 
 fn main() {
 
+    println!(":: Guess the number, baby! ::");
     let secret_number = rand::thread_rng().gen_range(1..=100);
-    println!("The secret number is: {secret_number}");
-
-    //processing a guess
-    println!("Guess the number, baby!");
 
     loop {
 
@@ -17,9 +14,12 @@ fn main() {
         io::stdin()
             .read_line(&mut guess)
             .expect("Failed to read line");
-
-        // 'shadow' // casting \)(O)
-        let guess: u32 = guess.trim().parse().expect("Please, type a number!");
+        
+        println!("Input your guess: ");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small"),
